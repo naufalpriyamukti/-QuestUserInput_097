@@ -26,14 +26,14 @@ import com.example.tugas5.ui.theme.Tugas5Theme
 @Composable
 fun FormDataDiri(){
     //Variabel-varibel untuk mengingat nilai masukan dari keyboard
-    var textNama by remerber { mutableStateOf(value = " ") }
-    var textAlamat by remerber { mutableStateOf(value = " ") }
-    var textJK by remerber { mutableStateOf(value = " ") }
+    var textNama by remember { mutableStateOf(value = " ") }
+    var textAlamat by remember { mutableStateOf(value = " ") }
+    var textJK by remember { mutableStateOf(value = " ") }
 
     //Variabel-varibel untuk menyimpan data yang diperoleh dari komponen UI
-    var nama by remerber { mutableStateOf(value = " ") }
-    var alamat by remerber { mutableStateOf(value = " ") }
-    var jenis by remerber { mutableStateOf(value = " ") }
+    var nama by remember { mutableStateOf(value = " ") }
+    var alamat by remember { mutableStateOf(value = " ") }
+    var jenis by remember { mutableStateOf(value = " ") }
 
     val gender:List<String> = listOf("Laki-laki", "Perempuan")
 
