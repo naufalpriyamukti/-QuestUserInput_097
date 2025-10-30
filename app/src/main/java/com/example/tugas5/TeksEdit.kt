@@ -8,11 +8,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tugas5.ui.theme.Tugas5Theme
@@ -37,8 +39,36 @@ fun FormDataDiri(){
         OutlinedTextField(
             value = textNama,
             singleLine = true,
-            shape = MaterialTheme.shapes.large
-            modifier = Modifier.width(width=250.dp)
+            shape = MaterialTheme.shapes.large,
+            modifier = Modifier.width(width=250.dp),
+            label = {Text{text = "Nama Lengkap"}},
+            onValueChange = {
+                textNama = it
+            }
+        )
+        Row {
+            gender.forEach { item ->
+                Row (modifier = Modifier.selectable(
+                    selected = textJk == item,
+                    onClick = { textJk = item}
+                ), verticalAlignment = Alignment.CenterVertically){
+                    RadioButton(
+                        selected = textJk == item,
+                        onClick = {
+                            textJk = item
+                        })
+                    Text(item)
+                }
+            }
+        }
+        OutlinedTextField(
+            value = textAlamat,
+            singleLine = true,
+            modifier = Modifier.width(250.dp),
+            label = {Text(text = "Alamat Lengkap")},
+            onValueChange = {
+                textAlamat = it
+            }
         )
     }
 
