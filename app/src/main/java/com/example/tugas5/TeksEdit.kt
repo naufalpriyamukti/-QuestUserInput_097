@@ -21,5 +21,10 @@ fun FormDataDiri(){
     var textAlamat by remerber { mutableStateOf(value = " ") }
     var textJK by remerber { mutableStateOf(value = " ") }
 
+    //Variabel-varibel untuk menyimpan data yang diperoleh dari komponen UI
+    var nama by remerber { mutableStateOf(value = " ") }
+    var alamat by remerber { mutableStateOf(value = " ") }
+    var jenis by remerber { mutableStateOf(value = " ") }
+
 
 }
