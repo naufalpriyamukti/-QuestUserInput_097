@@ -5,8 +5,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
@@ -27,5 +30,16 @@ fun FormDataDiri(){
     var jenis by remerber { mutableStateOf(value = " ") }
 
     val gender:List<String> = listOf("Laki-laki", "Perempuan")
+
+    Column(modifier = Modifier.padding(top = 50.dp),
+        verticalArragement = Arrangement.Top,
+        horizontalAlignment = Allingnment.CenterHorizontally){
+        OutlinedTextField(
+            value = textNama,
+            singleLine = true,
+            shape = MaterialTheme.shapes.large
+            modifier = Modifier.width(width=250.dp)
+        )
+    }
 
 }
