@@ -76,7 +76,9 @@ fun FormDataDiri(){
         Divider(
             mofier = Modifier.padding(bottom = dimensionResource(id=R.dimen.padding_medium), top = dimensionResource(
                 id = 30dp
-            ))
+            )),
+            thickness = dimensionResource(id=R.dimen.divider_tipis),
+            color = Color.DarkGray
         )
     }
 
