@@ -38,7 +38,7 @@ fun FormDataDiri(){
     val gender:List<String> = listOf("Laki-laki", "Perempuan")
 
     Column(modifier = Modifier.padding(top = 50.dp),
-        verticalArragement = Arrangement.Top,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Allingnment.CenterHorizontally){
         OutlinedTextField(
             value = textNama,
