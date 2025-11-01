@@ -38,18 +38,21 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun FormDataDiri(modifier: Modifier) {
+
     // Variabel-variabel untuk mengingat nilai masukan dari keyboard
     var textNama by remember { mutableStateOf("") }
     var textAlamat by remember { mutableStateOf("") }
     var textJK by remember { mutableStateOf("") }
+    var textStatus by remember { mutableStateOf("") }
 
     // Variabel-variabel untuk menyimpan data yang diperoleh dari komponen UI
     var nama by remember { mutableStateOf("") }
     var alamat by remember { mutableStateOf("") }
     var jenis by remember { mutableStateOf("") }
+    var status by remember { mutableStateOf("") }
 
-    val gender: List<String> = listOf("Laki-laki", "Perempuan")
-    val status: List<String> = listOf("Janda", "Lajang", "Duda")
+    val gender = listOf("Laki-laki", "Perempuan")
+    val statusList = listOf("Janda", "Lajang", "Duda")
 
 
     Column(
@@ -65,93 +68,105 @@ fun FormDataDiri(modifier: Modifier) {
                 .background(Color(0xFF9C27B0))
                 .padding(vertical = 24.dp),
             contentAlignment = Alignment.Center
-        )
+        ){
+            Text(
+                text = stringResource(id = R.string.formulir),
+                color = Color.White,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
 
-        OutlinedTextField(
-            value = textNama,
-            singleLine = true,
-            shape = MaterialTheme.shapes.large,
-            modifier = Modifier.width(width = 250.dp),
-            label = { Text(text = "Nama Lengkap") },
-            onValueChange = {
-                textNama = it
-            }
-        )
+        Card(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(0.9f),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            shape = MaterialTheme.shapes.medium
+        ){
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ){
+                OutlinedTextField(
+                    value = textNama,
+                    singleLine = true,
+                    shape = MaterialTheme.shapes.large,
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(text = "Isian nama lengkap") },
+                    onValueChange = {
+                        textNama = it
+                    }
+                )
 
-        Row {
-            gender.forEach { item ->
-                Row(
-                    modifier = Modifier.selectable(
-                        selected = textJK == item,
-                        onClick = { textJK = item }
-                    ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    RadioButton(
-                        selected = textJK == item,
-                        onClick = {
-                            textJK = item
+                Text("JENIS KELAMIN", fontWeight = FontWeight.Bold, fontSize = 13.sp,)
+                Column {
+                    gender.forEach { item ->
+                        Row(
+                            modifier = Modifier.selectable(
+                                selected = textJK == item,
+                                onClick = { textJK = item }
+                            ),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = textJK == item,
+                                onClick = {
+                                    textJK = item
+                                }
+                            )
+                            Text(text = item)
                         }
-                    )
-                    Text(text = item)
+                    }
+                }
+
+
+                Text("STATUS PERKAWINAN", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                statusList.forEach { item ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .selectable(
+                                selected = textStatus == item,
+                                onClick = { textStatus = item }
+                            )
+                            .padding(start = 4.dp)
+                    ) {
+                        RadioButton(
+                            selected = textStatus == item,
+                            onClick = { textStatus = item }
+                        )
+                        Text(text = item)
+                    }
+                }
+
+                Text("ALAMAT", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                OutlinedTextField(
+                    value = textAlamat,
+                    onValueChange = { textAlamat = it },
+                    label = { Text("Alamat") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+
+                Button(
+                    onClick = {
+                        nama = textNama
+                        alamat = textAlamat
+                        jenis = textJK
+                        status = textStatus
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7B1FA2))
+                ) {
+                    Text("Submit", color = Color.White)
                 }
             }
         }
 
-        OutlinedTextField(
-            value = textAlamat,
-            singleLine = true,
-            modifier = Modifier.width(250.dp),
-            label = { Text(text = "Alamat Lengkap") },
-            onValueChange = {
-                textAlamat = it
-            }
-        )
-
-        HorizontalDivider(
-            modifier = Modifier.padding(
-                bottom = dimensionResource(id = R.dimen.padding_medium),
-                top = dimensionResource(id = R.dimen.padding_medium)
-            ),
-            thickness = dimensionResource(id = R.dimen.divider_tipis),
-            color = Color.DarkGray
-        )
-
-        Button(
-            modifier = Modifier.fillMaxWidth(fraction = 1f),
-            // the button is enabled when the user makes a selection
-            enabled = textAlamat.isNotEmpty(),
-            onClick = {
-                nama = textNama
-                jenis = textJK
-                alamat = textAlamat
-            }
-        ) {
-            Text(text = stringResource(id = R.string.submit))
-        }
-
-        HorizontalDivider(
-            modifier = Modifier.padding(
-                bottom = dimensionResource(id = R.dimen.padding_medium),
-                top = dimensionResource(id = R.dimen.padding_medium)
-            ),
-            thickness = dimensionResource(id = R.dimen.divider_tipis),
-            color = Color.DarkGray
-        )
-
-        ElevatedCard(
-            elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.Black),
-            modifier = Modifier
-                .height(height = 200.dp)
-                .width(width = 300.dp)
-        ) {
-            Column(modifier = Modifier.padding(horizontal = 5.dp, vertical = 15.dp)) {
-                Text(text = "Nama: $nama", color = Color.White)
-                Text(text = "Gender: $jenis", color = Color.White)
-                Text(text = "Alamat: $alamat", color = Color.White)
-                Text("Hello world", color = Color.White)
-            }
-        }
     }
 }
