@@ -27,6 +27,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun FormDataDiri(modifier: Modifier) {
@@ -43,11 +51,22 @@ fun FormDataDiri(modifier: Modifier) {
     val gender: List<String> = listOf("Laki-laki", "Perempuan")
     val status: List<String> = listOf("Janda", "Lajang", "Duda")
 
+
     Column(
-        modifier = Modifier.padding(top = 50.dp),
-        verticalArrangement = Arrangement.Top,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFF2F2F2)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFF9C27B0))
+                .padding(vertical = 24.dp),
+            contentAlignment = Alignment.Center
+        )
+
         OutlinedTextField(
             value = textNama,
             singleLine = true,
