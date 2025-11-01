@@ -29,97 +29,110 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FormDataDiri(){
-    //Variabel-varibel untuk mengingat nilai masukan dari keyboard
-    var textNama by remember { mutableStateOf(value = " ") }
-    var textAlamat by remember { mutableStateOf(value = " ") }
-    var textJK by remember { mutableStateOf(value = " ") }
+fun FormDataDiri(modifier: Modifier) {
+    // Variabel-variabel untuk mengingat nilai masukan dari keyboard
+    var textNama by remember { mutableStateOf("") }
+    var textAlamat by remember { mutableStateOf("") }
+    var textJK by remember { mutableStateOf("") }
 
-    //Variabel-varibel untuk menyimpan data yang diperoleh dari komponen UI
-    var nama by remember { mutableStateOf(value = " ") }
-    var alamat by remember { mutableStateOf(value = " ") }
-    var jenis by remember { mutableStateOf(value = " ") }
+    // Variabel-variabel untuk menyimpan data yang diperoleh dari komponen UI
+    var nama by remember { mutableStateOf("") }
+    var alamat by remember { mutableStateOf("") }
+    var jenis by remember { mutableStateOf("") }
 
-    val gender:List<String> = listOf("Laki-laki", "Perempuan")
+    val gender: List<String> = listOf("Laki-laki", "Perempuan")
+    val status: List<String> = listOf("Janda", "Lajang", "Duda")
 
-    Column(modifier = Modifier.padding(top = 50.dp),
+    Column(
+        modifier = Modifier.padding(top = 50.dp),
         verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Allingnment.CenterHorizontally){
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         OutlinedTextField(
             value = textNama,
             singleLine = true,
             shape = MaterialTheme.shapes.large,
-            modifier = Modifier.width(width=250.dp),
-            label = {Text{text = "Nama Lengkap"}},
+            modifier = Modifier.width(width = 250.dp),
+            label = { Text(text = "Nama Lengkap") },
             onValueChange = {
                 textNama = it
             }
         )
+
         Row {
             gender.forEach { item ->
-                Row (modifier = Modifier.selectable(
-                    selected = textJk == item,
-                    onClick = { textJk = item}
-                ), verticalAlignment = Alignment.CenterVertically){
+                Row(
+                    modifier = Modifier.selectable(
+                        selected = textJK == item,
+                        onClick = { textJK = item }
+                    ),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     RadioButton(
-                        selected = textJk == item,
+                        selected = textJK == item,
                         onClick = {
-                            textJk = item
-                        })
-                    Text(item)
+                            textJK = item
+                        }
+                    )
+                    Text(text = item)
                 }
             }
         }
+
         OutlinedTextField(
             value = textAlamat,
             singleLine = true,
             modifier = Modifier.width(250.dp),
-            label = {Text(text = "Alamat Lengkap")},
+            label = { Text(text = "Alamat Lengkap") },
             onValueChange = {
                 textAlamat = it
             }
         )
 
-        Divider(
-            modifier = Modifier.padding(bottom = dimensionResource(id=R.dimen.padding_medium), top = dimensionResource(
-                id = R.dimen.padding_medium
-            )),
-            thickness = dimensionResource(id=R.dimen.divider_tipis),
+        HorizontalDivider(
+            modifier = Modifier.padding(
+                bottom = dimensionResource(id = R.dimen.padding_medium),
+                top = dimensionResource(id = R.dimen.padding_medium)
+            ),
+            thickness = dimensionResource(id = R.dimen.divider_tipis),
             color = Color.DarkGray
         )
+
         Button(
             modifier = Modifier.fillMaxWidth(fraction = 1f),
             // the button is enabled when the user makes a selection
             enabled = textAlamat.isNotEmpty(),
             onClick = {
-                nama=textNama
-                jenis=textJK
-                alamat=textAlamat
+                nama = textNama
+                jenis = textJK
+                alamat = textAlamat
             }
         ) {
             Text(text = stringResource(id = R.string.submit))
-
         }
-        Divider(
-            modifier = Modifier.padding(bottom = dimensionResource(id=R.dimen.padding_medium), top = dimensionResource(
-                id = R.dimen.padding_medium
-            )),
-            thickness = dimensionResource(id=R.dimen.divider_tipis),
+
+        HorizontalDivider(
+            modifier = Modifier.padding(
+                bottom = dimensionResource(id = R.dimen.padding_medium),
+                top = dimensionResource(id = R.dimen.padding_medium)
+            ),
+            thickness = dimensionResource(id = R.dimen.divider_tipis),
             color = Color.DarkGray
         )
+
         ElevatedCard(
             elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
             colors = CardDefaults.cardColors(containerColor = Color.Black),
             modifier = Modifier
-                .height(height = 100.dp)
+                .height(height = 200.dp)
                 .width(width = 300.dp)
-        ){
-            Column(modifier = Modifier.padding(horizontal = 5.dp, vertical = 15.dp)){
-                Text(text ="Nama : "+nama, color = Color.White)
-                Text(text ="Gender : "+jenis, color = Color.White)
-                Text(text ="Alamat : "+alamat, color = Color.White)
+        ) {
+            Column(modifier = Modifier.padding(horizontal = 5.dp, vertical = 15.dp)) {
+                Text(text = "Nama: $nama", color = Color.White)
+                Text(text = "Gender: $jenis", color = Color.White)
+                Text(text = "Alamat: $alamat", color = Color.White)
+                Text("Hello world", color = Color.White)
             }
         }
     }
-
 }
